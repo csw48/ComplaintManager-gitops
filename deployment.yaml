@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reddit-clone-deployment
+  name: pass-sk-complaintmanager
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: reddit-clone-app
+      app: pass-sk-complaintmanager
   template:
     metadata:
       labels:
-        app: reddit-clone-app
+        app: pass-sk-complaintmanager
     spec:
       containers:
-        - name: reddit-clone-app
-          image: ashfaque9x/reddit-clone-pipeline:1.0.0-11
+        - name: pass-sk-complaintmanager
+          image: csw48/pass-sk-complaintmanager:1.0.0-28
           resources:
             limits:
               cpu: "1"
