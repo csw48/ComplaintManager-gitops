@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: pass-sk-complaintmanager
-          image: csw48/pass-sk-complaintmanager-pipeline:1.0.0-28 # This will be replaced by Jenkins
+          image: csw48/pass-sk-complaintmanager-pipeline:1.0.0-28 
           resources:
             limits:
               cpu: "1"
