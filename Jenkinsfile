@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         APP_NAME = "pass-sk-complaintmanager-pipeline"
-        IMAGE_TAG = "1.0.0-28" // Define IMAGE_TAG or ensure it's passed as an environment variable
+        IMAGE_TAG = "1.0.0-${BUILD_NUMBER}" // Dynamic image tag based on build number
     }
     stages {
         stage("Cleanup Workspace") {
@@ -32,7 +32,7 @@ pipeline {
                     git config --global user.name "csw48"
                     git config --global user.email "juhalala048@gmail.com"
                     git add deployment.yaml
-                    git commit -m "Updated Deployment Manifest"
+                    git commit -m "Updated Deployment Manifest to ${IMAGE_TAG}"
                 """
                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                     sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/csw48/ComplaintManager-gitops.git main'
