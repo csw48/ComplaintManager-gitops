@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: reddit-clone-service
+  name: pass-sk-complaintmanager-service
   labels:
-    app: reddit-clone-app 
+    app: pass-sk-complaintmanager 
 spec:
   selector:
-    app: reddit-clone-app
+    app: pass-sk-complaintmanager
 
   ports:
     - port: 3000
