@@ -35,7 +35,7 @@ pipeline {
                     git commit -m "Updated Deployment Manifest"
                 """
                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                    sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/csw48/ComplaintManager-gitops.git main'
+                    sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/csw48/ComplaintManager-gitops main'
                 }
             }
         }
