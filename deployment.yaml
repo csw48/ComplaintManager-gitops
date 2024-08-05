@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: pass-sk-complaintmanager
-          image: juhal048/pass-sk-complaintmanager:1.0.0-28 
+          image: juhal048/pass-sk-complaintmanager:1.0.0-24
           resources:
             limits:
               cpu: "1"
