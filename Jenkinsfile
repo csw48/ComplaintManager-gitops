@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        APP_NAME = "pass-sk-complaintmanager-pipeline"
-        IMAGE_TAG = "1.0.0-${BUILD_NUMBER}" // Dynamic image tag based on build number
+        APP_NAME = "pass-sk-complaintmanager"
+        IMAGE_TAG = "1.0.0-28" // Dynamic image tag based on build number
     }
     stages {
         stage("Cleanup Workspace") {
