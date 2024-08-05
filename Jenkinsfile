@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-          APP_NAME = "pass-sk-complaintmanager-pipeline"
+          APP_NAME = "pass-sk-complaintmanager"
     }
     stages {
          stage("Cleanup Workspace") {
