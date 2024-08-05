@@ -1,29 +1,32 @@
 pipeline {
     agent any
     environment {
-          APP_NAME = "pass-sk-complaintmanager-pipeline"
+        APP_NAME = "pass-sk-complaintmanager-pipeline"
+        IMAGE_TAG = "1.0.0-${BUILD_NUMBER}" // Dynamic image tag based on build number
     }
     stages {
-         stage("Cleanup Workspace") {
-             steps {
+        stage("Cleanup Workspace") {
+            steps {
                 cleanWs()
-             }
-         }
-         stage("Checkout from SCM") {
-             steps {
-                     git branch: 'main', credentialsId: 'github', url: 'https://github.com/csw48/ComplaintManager-gitops'
-             }
-         }
-         stage("Update the Deployment Tags") {
+            }
+        }
+        stage("Checkout from SCM") {
+            steps {
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/csw48/ComplaintManager-gitops'
+            }
+        }
+        stage("Update the Deployment Tags") {
             steps {
                 sh """
+                    echo 'Original deployment.yaml:'
                     cat deployment.yaml
-                    sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
+                    sed -i 's|image: .*|image: ${APP_NAME}:${IMAGE_TAG}|g' deployment.yaml
+                    echo 'Updated deployment.yaml:'
                     cat deployment.yaml
                 """
             }
-         }
-         stage("Push the changed deployment file to GitHub") {
+        }
+        stage("Push the changed deployment file to GitHub") {
             steps {
                 sh """
                     git config --global user.name "csw48"
@@ -31,10 +34,10 @@ pipeline {
                     git add deployment.yaml
                     git commit -m "Updated Deployment Manifest"
                 """
-                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
-                    sh "git push https://github.com/csw48/ComplaintManager-gitops main"
+                withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                    sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/csw48/ComplaintManager-gitops.git main'
                 }
             }
-         }
+        }
     }
 }
