@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: pass-sk-complaintmanager-service
   labels:
-    app: pass-sk-complaintmanager 
+    app: complaint-manager-app
 spec:
   selector:
-    app: pass-sk-complaintmanager
+    app: complaint-manager-app
 
   ports:
     - port: 3000
